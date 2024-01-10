@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 21:15:25 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/09 21:52:21 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/10 13:49:32 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,26 @@ int	main( void ) {
 		uintptr_t	serializedData;
 		Data		*data = new Data();
 
-		std::cout << "Before: " << *data << std::endl;
+		std::cout << "Log 1: " << *data << std::endl;
 		serializedData = Serializer::serialize(data);
 		std::cout << "serializedData:  " << serializedData << std::endl;
+
+		std::cout << std::endl;
+
 		data->setInteger(24);
 		data->setDbl(5.6);
-		data->setStr("What is this?");
-		std::cout << "Within: " << *data << std::endl;
+		data->setStr("Who are you?");
+		std::cout << "Log 2: " << *data << std::endl;
+
+		std::cout << std::endl;
+
+		data = NULL;
+		std::cout << "Log 3: " << data << std::endl;
+
+		std::cout << std::endl;
+
 		data = Serializer::deserialize(serializedData);
-		std::cout << "After: " << *data << std::endl;
+		std::cout << "Log 4: " << *data << std::endl;
 
 		delete data;
 	}

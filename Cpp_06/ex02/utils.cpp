@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:04:17 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/09 22:20:44 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/10 13:55:05 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Base	*generate( void ) {
 	static int	choise = std::time(NULL) % 3;
 
 	choise = (choise + 1) % 3;
-	
+
 	switch (choise) {
 		case (0):
 			return (new A);
@@ -33,6 +33,7 @@ Base	*generate( void ) {
 }
 
 void	identify( Base *p ) {
+	std::cout << "identify, ptr version" << std::endl;
 	try {
 		if (dynamic_cast<A*>(p))
 			std::cout << "Type A" << std::endl;
@@ -46,6 +47,7 @@ void	identify( Base *p ) {
 }
 
 void	identify( Base &p ) {
+	std::cout << "identify, ref version" << std::endl;
 	try {
 		A a = dynamic_cast<A &>(p);
 		std::cout << "Type A" << std::endl;

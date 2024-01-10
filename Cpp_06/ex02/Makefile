@@ -1,5 +1,5 @@
 CXX			= c++
-NAME		= serializer
+NAME		= inheritance
 RM			= rm -rf
 
 CXXFLAGS	= -Wall -Wextra -Werror -MD -MP -std=c++98
