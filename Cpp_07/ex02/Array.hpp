@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:33 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/10 22:39:44 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/12 15:16:02 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ template <typename T>
 class Array {
 public:
 	Array( void ) : _size(DEFAULT_SIZE), _arr(NULL) {};
-	Array( unsigned int n ) : _size(n) {
-		this->_arr = new T[this->_size]();
-	};
+	Array( unsigned int n ) : _size(n), _arr(new T[this->_size]()) {};
 	Array( const Array &other ) : _size(other._size), _arr(new T[this->_size]()) {
 		for (unsigned int i = 0; i < this->_size; ++i)
 			this->_arr[i] = other._arr[i];
