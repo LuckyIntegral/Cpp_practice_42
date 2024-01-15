@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 15:19:40 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/10 16:48:33 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/15 14:40:21 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ int	main( void ) {
 		iter(arr2, 5, assign);
 		iter(arr2, 5, print);
 	}
-	return 0;
+	return (0);
 }
