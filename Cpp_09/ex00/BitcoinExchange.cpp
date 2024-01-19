@@ -6,16 +6,14 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:52:01 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/14 18:54:50 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:17:44 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-#include <algorithm>
+#include <cstdlib>
 #include <fstream>
-#include <iostream>
-#include <iterator>
 
 BitcoinExchange::BitcoinExchange()
 		: _database(std::map<std::string, double>()) {
@@ -42,11 +40,9 @@ void	BitcoinExchange::initDb( const char *file ) {
 	while (std::getline(input, line)) {
 		if (line.length() < 10 || line.at(10) != ',')
 			continue ;
-		std::pair<std::string, double>	pair(
-			line.substr(0, 10),
-			std::atof(line.c_str() + 11)
-		);
-		this->_database.insert(pair);
+		std::string key = line.substr(0, 10);
+		double value = std::atof(line.c_str() + 11);
+		this->_database[key] = value;
 	}
 
 	input.close();
