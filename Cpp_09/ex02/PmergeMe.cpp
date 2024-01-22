@@ -47,14 +47,14 @@ static bool	isSorted( vi &ns ) {
 	return (true);
 }
 
-static std::pair<vi, vi>	sortedPairs( vi &ns, int i ) {
+static std::pair<vi, vi>	sortePairs( vi &ns, int i ) {
 	vi	smaller, bigger;
 
 	for (viit it = ns.begin(); it <= ns.end() - 1 - i; std::advance(it, 2)) {
 		bigger.push_back(std::max(*it, *(it + 1)));
 		smaller.push_back(std::min(*it, *(it + 1)));
 	}
-	return (std::pair< vi, vi >(smaller, bigger));
+	return (std::pair<vi, vi>(smaller, bigger));
 }
 
 static void mergePairs( viit begin, viit middle, viit end ) {
@@ -109,61 +109,17 @@ void	PmergeMe::mergeInsertSort( vi &ns ) {
 		return ;
 	bool	hasExtraElement = ns.size() % 2 == 1;
 	int		extraElement = 0;
-	if (hasExtraElement) {// check if there is odd number of elements and pop it
+	if (hasExtraElement) {
 		extraElement = ns.back();
 		ns.pop_back();
 	}
 
 	pv(ns);
 
-	// stage 1: sort values within pairs
-	// before:  9 1   8 2   7 3   6 4
-	// after : (1 9) (2 8) (3 7) (4 6)
-	// std::cout << "All:" << std::endl;
-	// for (vi::iterator it = ns.begin(); it != ns.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-
-	std::pair<vi, vi> pairs = sortedPairs(ns, hasExtraElement);
-
-	// for (vi::iterator it = pairs.first.begin(); it != pairs.first.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-	// for (vi::iterator it = pairs.second.begin(); it != pairs.second.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-	// stage 2: recursively sort pairs by second element
-	// before: (1 9) (2 8) (3 7) (4 6)
-	// after : (4 6) (3 7) (2 8) (1 9)
-	// std::cout << "Line 1:" << std::endl;
-	// for (vi::iterator it = pairs.first.begin(); it != pairs.first.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
+	std::pair<vi, vi> pairs = sortePairs(ns, hasExtraElement);
 
 	recursiveSort(pairs.first, pairs.first.begin(), pairs.first.end());
-
-	// std::cout << "Srted line 1:" << std::endl;
-	// for (vi::iterator it = pairs.first.begin(); it != pairs.first.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-
-	// std::cout << "Line 2:" << std::endl;
-	// for (vi::iterator it = pairs.second.begin(); it != pairs.second.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-
 	recursiveSort(pairs.second, pairs.second.begin(), pairs.second.end());
-
-	// std::cout << "Sorteed line 2:" << std::endl;
-	// for (vi::iterator it = pairs.second.begin(); it != pairs.second.end(); ++it)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-
-	// stage 3: merge sorted pairs
-
-	// std::cout << "Before: " << std::endl;
-	// pv(pairs.first);
-	// pv(pairs.second);
 
 	pairs.second.insert(pairs.second.begin(), *pairs.first.begin());
 	pairs.first.erase(pairs.first.begin());
@@ -174,11 +130,6 @@ void	PmergeMe::mergeInsertSort( vi &ns ) {
     	ns.insert(std::lower_bound(ns.begin(), ns.end(), extraElement), extraElement);
 
 	pv(ns);
-
-	// std::cout << "After: " << std::endl;
-	// pv(pairs.first);
-	// pv(ns);
-
 }
 
 vi	PmergeMe::parseArgs( const int &c, const char **v ) {

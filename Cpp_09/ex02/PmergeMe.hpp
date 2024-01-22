@@ -9,8 +9,6 @@
 
 typedef std::vector< int >								vi;
 typedef std::vector< int >::iterator					viit;
-typedef std::vector< std::pair< int, int > >			vpii;
-typedef std::vector< std::pair< int, int > >::iterator	vpiiit;
 
 class PmergeMe {
 public:
