@@ -19,7 +19,7 @@ run		: re
 
 test	: re
 		@clear
-		@valgrind -s ./${NAME};
+		@valgrind ./${NAME} `shuf -i 1-1000000 -n 11 | tr "\n" " "`
 		@$(RM) $(OBJS_DIR) $(NAME)
 
 3000	: re

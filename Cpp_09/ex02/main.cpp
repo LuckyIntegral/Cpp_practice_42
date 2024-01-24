@@ -6,10 +6,12 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:59:02 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/22 20:05:32 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:06:09 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctime>
+#include <deque>
 #include <iostream>
 #include <sstream>
 
@@ -36,6 +38,12 @@ static inline bool	areValidNumbers( const int &c, const char **v ) {
 	return (true);
 }
 
+static inline void	pv( vi &ns ) {
+	for (viit it = ns.begin(); it != ns.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
 int main( int c, const char **v ) {
     if (c == 1) {
         std::cout << "Usage: " << v[0] << " <numbers_to_sort>" << std::endl;
@@ -47,17 +55,42 @@ int main( int c, const char **v ) {
 		return (1);
 	}
 
-    std::vector<int>    first = PmergeMe::parseArgs(c, v);
+	if (c == 2) {
+        std::cout << "One number is not enough" << std::endl;
+        return (1);
+    }
 
+	// set up containers
+	std::clock_t vector_inserting_start = std::clock(); // Start timer
+    vi	first = PmergeMe::parseArgsVector(c, v);
+	std::clock_t vector_inserting_end = std::clock(); // Start timer
+
+	std::cout << "Before: "; pv(first);
+
+	std::clock_t vector_sorting_start = std::clock(); // Start timer
 	PmergeMe::mergeInsertSort(first);
+	std::clock_t vector_sorting_end = std::clock(); // Finish timer
 
-	std::cout << "Size " << first.size() << std::endl;
+	std::cout << "After:  "; pv(first);
 
-	// vi first = PmergeMe::jacobsthalNumbers();
+	std::cout << "Vector: {sorting time: " << (vector_sorting_end - vector_sorting_start) / 1000.
+		<< " us, time for data management: " << (vector_inserting_end - vector_inserting_start) / 1000.
+		<< " us, size of vector: " << first.size() << '}' << std::endl;
 
-	// for (vi::iterator it = first.begin(); it != first.end(); ++it) {
-	// 	std::cout << *it << " ";
-	// }
+	std::clock_t deque_inserting_start = std::clock(); // Start timer
+    di	second = PmergeMe::parseArgsDeque(c, v);
+	std::clock_t deque_inserting_end = std::clock(); // Start timer
+
+	std::clock_t deque_sorting_start = std::clock(); // Start timer
+	PmergeMe::mergeInsertSort(first);
+	std::clock_t deque_sorting_end = std::clock(); // Finish timer
+
+	std::cout << "Deque:  {sorting time: " << (deque_sorting_end - deque_sorting_start) / 1000.
+		<< " us, time for data management: " << (deque_inserting_end - deque_inserting_start) / 1000.
+		<< " us, size of deque: " << first.size() << '}' << std::endl;
+
+	std::cout << "Is vector sorted? " << (PmergeMe::isSorted(first) ? "OK" : "KO") << std::endl;
+	std::cout << "Is deque sorted?  " << (PmergeMe::isSorted(first) ? "OK" : "KO") << std::endl;
 
     return (0);
 }
