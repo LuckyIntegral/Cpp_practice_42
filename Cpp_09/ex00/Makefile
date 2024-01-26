@@ -2,7 +2,7 @@ CXX			= c++
 NAME		= btc
 RM			= rm -rf
 
-CXXFLAGS	= -Wall -Wextra -Werror -MD -MP -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -g -MD -MP -std=c++98
 
 SRCS	= main.cpp BitcoinExchange.cpp
 

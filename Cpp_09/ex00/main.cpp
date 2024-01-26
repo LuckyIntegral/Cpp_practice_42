@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:36:00 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/14 18:42:04 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:05:20 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main( int argc, const char **argv ) {
 		return (1);
 	}
 
-	BitcoinExchange	exchanger(DATABASE_PATH);
 	std::ifstream	inputFileStream(argv[1]);
 	std::string		line;
 
@@ -35,6 +34,7 @@ int	main( int argc, const char **argv ) {
 	}
 
 	try {
+		BitcoinExchange	exchanger(DATABASE_PATH);
 		if (!std::getline(inputFileStream, line))
 			throw BitcoinExchange::BadInputException();
 
