@@ -19,7 +19,7 @@ run		: re
 
 test	: re
 		@clear
-		@valgrind ./${NAME} `shuf -i 1-1000000 -n 11 | tr "\n" " "`
+		@valgrind ./${NAME} `shuf -i 1-1000000 -n 100001 | tr "\n" " "`
 		@$(RM) $(OBJS_DIR) $(NAME)
 
 3000	: re
@@ -30,6 +30,11 @@ test	: re
 10000	: re
 		@clear
 		@./${NAME} `shuf -i 1-1000000 -n 10000 | tr "\n" " "`
+		@$(RM) $(OBJS_DIR) $(NAME)
+
+100000	: re
+		@clear
+		@./${NAME} `shuf -i 1-1000000 -n 100000 | tr "\n" " "`
 		@$(RM) $(OBJS_DIR) $(NAME)
 
 $(NAME)	: $(OBJS)

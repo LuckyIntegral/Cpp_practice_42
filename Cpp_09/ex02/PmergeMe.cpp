@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <iostream>
 #include <iterator>
 #include <utility>
 #include <vector>
@@ -85,17 +86,17 @@ static void	recursiveSort( vi &ns, viit begin, viit end ) {
 
 static vi	jacobsthalInsert( vi &first, vi &second ) {
 	const vi jn = PmergeMe::jacobsthalNumbers();
-	vi	res(second);
-	viit	lower, upper;
+	vi		res(second);
+	viit	lower, upper, where;
 
 	for (int n = 1; !first.empty(); ++n) {
 		for (int i = jn[n] - jn[n - 1] - 1; i >= 0; --i) {
 			if (first.empty())
 				break ;
 			i = std::min(i, static_cast<int>(first.size()) - 1);
-			lower = res.begin();
-			upper = std::max((res.begin() + (2 << n) - 1), res.end());
-			viit where = std::lower_bound(lower, upper, first[i]);
+			lower = res.begin() + (jn[n - 1]) - 1;
+			upper = std::min((res.begin() + (2 * jn[n]) - 1), res.end());
+			where = std::lower_bound(lower, upper, first[i]);
 			res.insert(where, first[i]);
 			first.erase(first.begin() + i);
 		}
@@ -129,17 +130,17 @@ void	PmergeMe::mergeInsertSort( vi &ns ) {
 
 static di	jacobsthalInsert( di &first, di &second ) {
 	const vi jn = PmergeMe::jacobsthalNumbers();
-	di	res(second);
-	diit	lower, upper;
+	di		res(second);
+	diit	lower, upper, where;
 
 	for (int n = 1; !first.empty(); ++n) {
 		for (int i = jn[n] - jn[n - 1] - 1; i >= 0; --i) {
 			if (first.empty())
 				break ;
 			i = std::min(i, static_cast<int>(first.size()) - 1);
-			lower = res.begin();
-			upper = std::max((res.begin() + (2 << n) - 1), res.end());
-			diit where = std::lower_bound(lower, upper, first[i]);
+			lower = res.begin() + (jn[n - 1]) - 1;
+			upper = std::min((res.begin() + (2 * jn[n]) - 1), res.end());
+			where = std::lower_bound(lower, upper, first[i]);
 			res.insert(where, first[i]);
 			first.erase(first.begin() + i);
 		}

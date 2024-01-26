@@ -6,18 +6,20 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:59:02 by vfrants           #+#    #+#             */
-/*   Updated: 2024/01/24 15:06:09 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/26 17:17:58 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ctime>
-#include <deque>
 #include <iostream>
 #include <sstream>
 
 #include "PmergeMe.hpp"
 
 static bool	isInvalidNumber( const std::string &v ) {
+	if (v.empty())
+		return (true);
+
 	for (int i = v[0] == '-' ? 1 : 0; v[i]; ++i)
 		if (!std::isdigit(v[i]))
 			return (true);
@@ -82,7 +84,7 @@ int main( int c, const char **v ) {
 	std::clock_t deque_inserting_end = std::clock(); // Start timer
 
 	std::clock_t deque_sorting_start = std::clock(); // Start timer
-	PmergeMe::mergeInsertSort(first);
+	PmergeMe::mergeInsertSort(second);
 	std::clock_t deque_sorting_end = std::clock(); // Finish timer
 
 	std::cout << "Deque:  {sorting time: " << (deque_sorting_end - deque_sorting_start) / 1000.
@@ -90,7 +92,7 @@ int main( int c, const char **v ) {
 		<< " us, size of deque: " << first.size() << '}' << std::endl;
 
 	std::cout << "Is vector sorted? " << (PmergeMe::isSorted(first) ? "OK" : "KO") << std::endl;
-	std::cout << "Is deque sorted?  " << (PmergeMe::isSorted(first) ? "OK" : "KO") << std::endl;
+	std::cout << "Is deque sorted?  " << (PmergeMe::isSorted(second) ? "OK" : "KO") << std::endl;
 
     return (0);
 }
