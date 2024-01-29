@@ -1,23 +1,23 @@
-CPP			= c++
-NAME		= fixedPoint
+CXX			= c++
+NAME		= bsp
 RM			= rm -rf
 
-CPPFLAGS	= -Wall -Wextra -Werror -MD -MP -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -MD -MP -std=c++98
 
-SRCS	= Fixed.cpp main.cpp
+SRCS	= Fixed.cpp main.cpp Point.cpp bsp.cpp
 
-OBJSDIR	= objs
+OBJS_DIR	= objs
 OBJS	= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 DEPS	= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.d))
 
 all		: $(NAME)
 
 $(NAME)	: ${OBJS}
-		$(CPP) -o $@ $^
+		$(CXX) -o $@ $^
 
 objs/%.o: %.cpp
 		@mkdir -p $(dir $@)
-		${CPP} ${CPPFLAGS} -c $< -o $@
+		${CXX} ${CXXFLAGS} -c $< -o $@
 
 clean	:
 		$(RM) $(OBJS_DIR)

@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 22:44:49 by vfrants           #+#    #+#             */
-/*   Updated: 2023/12/19 22:57:55 by vfrants          ###   ########.fr       */
+/*   Updated: 2024/01/29 20:17:29 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ public:
 	Point( const Point &other );
 	~Point();
 
-	Point &operator=( const Point &other );
+	Point &operator=( const Point & );
 
 	Fixed	getX( void ) const;
 	Fixed	getY( void ) const;
