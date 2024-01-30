@@ -6,7 +6,7 @@ CPPFLAGS	= -Wall -Wextra -Werror -MD -MP -std=c++98
 
 SRCS	= Fixed.cpp main.cpp
 
-OBJSDIR	= objs
+OBJS_DIR	= objs
 OBJS	= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.o))
 DEPS	= $(addprefix $(OBJS_DIR)/, $(SRCS:.cpp=.d))
 
